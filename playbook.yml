@@ -1,0 +1,17 @@
+- hosts: all
+  become: yes
+
+  pre_tasks:
+    - name: Update apt cache
+      apt:
+        update_cache: yes
+        cache_valid_time: 3600  # Update cache if it's older than 1 hour
+        
+  vars:
+    ansible_python_interpreter: /usr/bin/python3
+    pip_install_packages:
+      - name: docker
+
+  roles:
+    - geerlingguy.pip
+    - geerlingguy.docker

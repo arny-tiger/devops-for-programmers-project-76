@@ -1,4 +1,4 @@
-project_path: "{{ ansible_env.HOME }}/redmine"
+project_path: "/home/sam/redmine"
 
 image_name: redmine:6.0.2
 host_port: 80

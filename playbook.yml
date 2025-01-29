@@ -5,7 +5,7 @@
     - name: Update apt cache
       apt:
         update_cache: yes
-        cache_valid_time: 3600  # Update cache if it's older than 1 hour
+        cache_valid_time: 3600
         
   vars:
     ansible_python_interpreter: /usr/bin/python3
@@ -29,6 +29,16 @@
         dest: "{{ project_path }}/.env"
         mode: '0600'
 
+    - name: Check if .env file exists
+      stat:
+        path: "{{ project_path }}/.env"
+      register: env_file
+
+    - name: Check .env file status
+      debug:
+        msg: ".env file created successfully"
+      when: env_file.stat.exists
+
     - name: Pull Redmine Docker image
       docker_image:
         name: "{{ image_name }}"
@@ -41,5 +51,7 @@
         state: started
         restart_policy: unless-stopped
         env_file: "{{ project_path }}/.env"
+        volumes:
+          - "{{ project_path }}/files:/usr/src/redmine/files"
         ports:
           - "{{ host_port }}:{{ container_port }}"

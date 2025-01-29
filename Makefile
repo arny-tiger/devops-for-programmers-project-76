@@ -7,5 +7,11 @@ ansible-list:
 ansible-ping:
 	ansible -i inventory.ini all -m ping
 
-ansible-playbook:
-	ansible-playbook -i inventory.ini playbook.yml
+ansible-deploy:
+	ansible-playbook -i inventory.ini playbook.yml --ask-vault-pass
+
+ansible-create-vault:
+	ansible-vault create group_vars/webservers/vault.yml
+
+ansible-edit-vault:
+	ansible-vault edit group_vars/webservers/vault.yml

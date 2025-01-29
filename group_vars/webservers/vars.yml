@@ -1,0 +1,11 @@
+project_path: "{{ ansible_env.HOME }}/redmine"
+
+image_name: redmine:6.0.2
+host_port: 80
+container_port: 3000
+
+redmine_db_name: "{{ db_name }}"
+redmine_db_host: "{{ db_host }}"
+redmine_db_port: "{{ db_port }}"
+redmine_db_username: "{{ db_username }}"
+redmine_db_password: "{{ db_password }}"

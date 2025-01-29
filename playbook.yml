@@ -15,3 +15,31 @@
   roles:
     - geerlingguy.pip
     - geerlingguy.docker
+
+  tasks:
+    - name: Create project directory
+      file:
+        path: "{{ project_path }}"
+        state: directory
+        mode: '0755'
+
+    - name: Generate and copy .env file
+      template:
+        src: .env.j2
+        dest: "{{ project_path }}/.env"
+        mode: '0600'
+
+    - name: Pull Redmine Docker image
+      docker_image:
+        name: "{{ image_name }}"
+        source: pull
+    
+    - name: Run Redmine container
+      docker_container:
+        name: redmine-docker
+        image: "{{ image_name }}"
+        state: started
+        restart_policy: unless-stopped
+        env_file: "{{ project_path }}/.env"
+        ports:
+          - "{{ host_port }}:{{ container_port }}"

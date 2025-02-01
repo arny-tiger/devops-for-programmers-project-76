@@ -39,12 +39,12 @@
       when: env_file.stat.exists
 
     - name: Pull Redmine Docker image
-      docker_image:
+      community.docker.docker_image:
         name: "{{ image_name }}"
         source: pull
     
     - name: Run Redmine container
-      docker_container:
+      community.docker.docker_container:
         name: redmine-docker
         image: "{{ image_name }}"
         state: started

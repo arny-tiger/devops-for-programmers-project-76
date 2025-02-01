@@ -4,5 +4,7 @@ roles:
   - src: geerlingguy.docker
     version: 7.4.4
 collections:
+  - name: community.docker
+    version: 4.3.1
   - name: datadog.dd
     version: 5.8.0

@@ -1,3 +1,4 @@
+ansible_python_interpreter: /usr/bin/python3
 project_path: "/home/sam/redmine"
 
 image_name: redmine:6.0.2
@@ -9,3 +10,6 @@ redmine_db_host: "{{ db_host }}"
 redmine_db_port: "{{ db_port }}"
 redmine_db_username: "{{ db_username }}"
 redmine_db_password: "{{ db_password }}"
+
+datadog_api_key: "{{ dd_api_key }}"
+datadog_site: "datadoghq.eu"

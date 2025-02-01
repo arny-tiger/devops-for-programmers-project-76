@@ -7,14 +7,13 @@
         update_cache: yes
         cache_valid_time: 3600
         
-  vars:
-    ansible_python_interpreter: /usr/bin/python3
-    pip_install_packages:
-      - name: docker
-
   roles:
-    - geerlingguy.pip
+    - role: geerlingguy.pip
+      vars:
+        pip_install_packages:
+          - name: docker
     - geerlingguy.docker
+
 
   tasks:
     - name: Create project directory
@@ -55,3 +54,19 @@
           - "{{ project_path }}/files:/usr/src/redmine/files"
         ports:
           - "{{ host_port }}:{{ container_port }}"
+    
+- hosts: webservers
+  become: yes
+
+  roles:
+    - role: datadog.dd.agent
+      vars:
+        datadog_site: "datadoghq.eu"
+        datadog_checks:
+          http_check:
+            init_config:
+            instances:
+              - name: "Redmine healthcheck"
+                url: "http://localhost:{{ host_port }}"
+                timeout: 3
+                method: GET

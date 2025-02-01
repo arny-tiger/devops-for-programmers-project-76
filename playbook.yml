@@ -8,11 +8,11 @@
         cache_valid_time: 3600
         
   roles:
+    - geerlingguy.docker
     - role: geerlingguy.pip
       vars:
         pip_install_packages:
           - name: docker
-    - geerlingguy.docker
 
 
   tasks:

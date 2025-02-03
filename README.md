@@ -8,3 +8,5 @@
 3) Снова зашифровать vault.yml командой make ansible-encrypt-vault
 4) Выполнить make ansible-install для установки необходимых модулей
 5) Выполнить make ansible-deploy для деплоя
+
+Сайт: https://brody30.space

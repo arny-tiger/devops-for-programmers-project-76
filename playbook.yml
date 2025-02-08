@@ -19,13 +19,13 @@
       file:
         path: "{{ project_path }}"
         state: directory
-        mode: '0755'
+        mode: '755'
 
     - name: Generate and copy .env file
       template:
         src: .env.j2
         dest: "{{ project_path }}/.env"
-        mode: '0600'
+        mode: '600'
 
     - name: Check if .env file exists
       stat:
